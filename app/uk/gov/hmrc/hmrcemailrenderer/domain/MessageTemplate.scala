@@ -60,7 +60,24 @@ object MessageTemplate {
       Subject.fromPlainString(subject),
       plainTemplate,
       htmlTemplate,
-      MessagePriority.Normal
+      MessagePriority.Standard
+    )
+
+  def create(templateId: String,
+             fromAddress: String,
+             service: ServiceIdentifier,
+             subject: Map[String, String] => String,
+             plainTemplate: Body.Plain,
+             htmlTemplate: Body.Html,
+             priority: MessagePriority) =
+    MessageTemplate(
+      templateId,
+      fromAddress,
+      service,
+      Subject(subject),
+      plainTemplate,
+      htmlTemplate,
+      priority
     )
 
   def create(templateId: String,
@@ -76,7 +93,7 @@ object MessageTemplate {
       Subject(subject),
       plainTemplate,
       htmlTemplate,
-      MessagePriority.Normal
+      MessagePriority.Standard
     )
 }
 case class Subject(f: Map[String, String] => String) {

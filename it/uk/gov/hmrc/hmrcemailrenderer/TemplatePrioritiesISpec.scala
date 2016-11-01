@@ -78,6 +78,44 @@ class TemplatePrioritiesISpec extends ServiceSpec
       }
     }
 
+    val backgroundTemplates = Table[String, Map[String, String]](
+      ("templateIds", "params"),
+      ("newMessageAlert_SA316", Map[String, String]()),
+      ("newMessageAlert_SS300", Map[String, String]()),
+      ("newMessageAlert_SA300", Map[String, String]()),
+      ("annual_tax_summaries_message_alert", Map("taxYear" -> "2016"))
+    )
+
+    forAll(backgroundTemplates) {
+      (templateId, params) =>
+        s"have correct background priorities for templateId '$templateId'" in {
+          val response = WS.url(resource(s"/templates/$templateId")).post(Json.obj("parameters" -> params))
+          response should have(
+            status(200),
+            jsonProperty(__ \ "priority", "background")
+          )
+        }
+    }
+
+    val normalTemplates = Table[String, Map[String, String]](
+      ("templateIds", "params"),
+      ("newMessageAlert", Map[String, String]()),
+      ("verificationReminder", Map[String, String]("verificationLink" -> "/abc")),
+      ("indefensibleUpgrade", Map[String, String]()),
+      ("digitalOptOutConfirmation", Map[String, String]())
+    )
+
+    forAll(normalTemplates) {
+      (templateId, params) =>
+        s"have correct background priorities for templateId '$templateId'" in {
+          val response = WS.url(resource(s"/templates/$templateId")).post(Json.obj("parameters" -> params))
+          response should have(
+            status(200),
+            jsonProperty(__ \ "priority", "standard")
+          )
+        }
+    }
+
   }
 
   override protected val server = new TestServer()

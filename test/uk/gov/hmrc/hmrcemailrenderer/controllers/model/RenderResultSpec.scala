@@ -38,7 +38,7 @@ class RenderResultSpec extends UnitSpec with GeneratorDrivenPropertyChecks {
           "fromAddress",
           "subject",
           "service",
-          MessagePriority.Normal
+          MessagePriority.Standard
         )
       )
 

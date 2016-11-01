@@ -106,21 +106,27 @@ object DigitalContactTemplates {
       service = SelfAssessment,
       subject = "Self Assessment reminders: new message",
       plainTemplate = txt.newMessageAlertSS300.f,
-      htmlTemplate = html.newMessageAlertSS300.f),
+      htmlTemplate = html.newMessageAlertSS300.f,
+      priority = MessagePriority.Background
+    ),
     MessageTemplate.create(
       templateId = "newMessageAlert_SA300",
       fromAddress = defaultFromAddress,
       service = SelfAssessment,
       subject = "Self Assessment reminders: new message",
       plainTemplate = txt.newMessageAlertSA300.f,
-      htmlTemplate = html.newMessageAlertSA300.f),
+      htmlTemplate = html.newMessageAlertSA300.f,
+      priority = MessagePriority.Background
+    ),
     MessageTemplate.create(
       templateId = "newMessageAlert_SA316",
       fromAddress = FromAddress.noReply("HMRC Self Assessment"),
       service = SelfAssessment,
       subject = "File your Self Assessment return",
       plainTemplate = txt.newMessageAlertSA316_A.f,
-      htmlTemplate = html.newMessageAlertSA316_A.f)
+      htmlTemplate = html.newMessageAlertSA316_A.f,
+      priority = MessagePriority.Background
+    )
 
   )
 }

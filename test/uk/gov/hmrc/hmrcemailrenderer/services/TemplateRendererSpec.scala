@@ -62,7 +62,8 @@ class TemplateRendererSpec extends UnitSpec with MockitoSugar {
       service = SelfAssessment,
       subject = "a subject",
       plainTemplate = txt.templateSample.f,
-      htmlTemplate = html.templateSample.f
+      htmlTemplate = html.templateSample.f,
+      MessagePriority.Urgent
     )
 
     val validRenderedResult = RenderResult(
